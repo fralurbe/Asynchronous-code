@@ -2,19 +2,22 @@ const fakeRequest = (url) => {
     return new Promise((resolve, reject) => {
         setTimeout(()=>{
             const rand = Math.random();
-            if(rand<0.3){
-                reject();
+            if(rand < 0.4){
+                reject({status : 404});
             }
-            else {
-                resolve();
+            else {                
+                resolve({status : 200});
             }
-        },3000);
+        },1000);
     })
 }
 
-fakeRequest()
-    .then(()=>{console.log('Request worked')})
-    .catch(()=>{console.log('Request failed')});
+fakeRequest('/users')
+    .then((res)=>{     
+        console.log('Request worked ', res.status)})
+    .catch((res)=>{        
+        console.log('Request failed ', res.status);
+    });
 
 
 
